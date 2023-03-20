@@ -32,7 +32,7 @@ async function main() {
   //   constructorArguments: ['BEP20B', 'BEP20B', 9],
   // })
 
-  // BEP20B
+  // StakingRewards
   const stakingRewardsAddress = StakingRewards[chainId]
   await hre.run('verify:verify', {
     address: stakingRewardsAddress,
