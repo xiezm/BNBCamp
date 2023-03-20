@@ -11,3 +11,8 @@ export const BEP20B: AddressMap = {
   [SupportedChainId.BSC]: '',
   [SupportedChainId.BSC_TEST]: '0xb982a28d74b3C19BDb807962339d6F0Ca96B253E',
 }
+
+export const StakingRewards: AddressMap = {
+  [SupportedChainId.BSC]: '',
+  [SupportedChainId.BSC_TEST]: '0x9Cb28Be8Cc2BD66568Ba0072BC94179FBc6d81DC',
+}
