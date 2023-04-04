@@ -28,14 +28,14 @@ async function main() {
 
   //【DemoNFTLogic】
   const DemoNFTLogicAddress = addresses.DemoNFTLogic[chainId]
-  // await hre.run('verify:verify', {
-  //   address: DemoNFTLogicAddress,
-  // })
+  await hre.run('verify:verify', {
+    address: DemoNFTLogicAddress,
+  })
 
   //【DemoNFTProxy】
   const DemoNFTProxyAddress = addresses.DemoNFTProxy[chainId]
-  const _data = DemoNFT__factory.createInterface().encodeFunctionData('initialize')
-  console.log(' DemoNFTProxy data = %s', _data)
+  // const _data = DemoNFT__factory.createInterface().encodeFunctionData('initialize')
+  // console.log(' DemoNFTProxy data = %s', _data)
   // await hre.run('verify:verify', {
   //   address: DemoNFTProxyAddress,
   //   constructorArguments: [DemoNFTLogicAddress, DemoProxyAdminAddress, _data],

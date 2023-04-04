@@ -93,7 +93,7 @@ contract DemoNFT is AccessControlEnumerableUpgradeable, PausableUpgradeable, ERC
         uint256 length = recipients.length;
         for (uint256 i = 0; i < length;) {
             mint(recipients[i]);
-            unchecked{++i;}
+        unchecked{++i;}
         }
     }
 
@@ -116,6 +116,25 @@ contract DemoNFT is AccessControlEnumerableUpgradeable, PausableUpgradeable, ERC
             roleMember[i] = _roleMembers[role].at(cursor + i);
         }
         return (roleMember, cursor + length);
+    }
+
+    function setDefaultRoyalty(address royaltyReceiver, uint96 feeNumerator) external {
+        require(hasRole(ROLE_ADMIN, _msgSender()), "DemoNFT: ERR_ACCESS_DENIED");
+        _setDefaultRoyalty(royaltyReceiver, feeNumerator);
+    }
+
+    function frozenTokenId(uint256 tokenId_) public {
+        require(hasRole(ROLE_FROZEN, _msgSender()), "DemoNFT: ERR_ACCESS_DENIED");
+        require(!isFrozenTokenId[tokenId_], "DemoNFT: tokenId is frozen");
+        isFrozenTokenId[tokenId_] = true;
+        emit FrozenTokenId(tokenId_);
+    }
+
+    function unfreezeTokenId(uint256 tokenId_) public {
+        require(hasRole(ROLE_FROZEN, _msgSender()), "DemoNFT: ERR_ACCESS_DENIED");
+        require(isFrozenTokenId[tokenId_], "DemoNFT: tokenId not frozen");
+        isFrozenTokenId[tokenId_] = false;
+        emit UnfreezeTokenId(tokenId_);
     }
 
     function _revokeRole(bytes32 role, address account) internal override {

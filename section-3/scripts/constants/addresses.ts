@@ -9,7 +9,7 @@ const DemoProxyAdmin: AddressMap = {
 
 const DemoNFTLogic: AddressMap = {
   [SupportedChainId.BSC]: '',
-  [SupportedChainId.BSC_TEST]: '0xd68d151F65f502344A49d3E1565159f33Cd58844',
+  [SupportedChainId.BSC_TEST]: '0xa145b55A9505FEEB751bB573210bbe591c832D55',
 }
 
 const DemoNFTProxy: AddressMap = {
