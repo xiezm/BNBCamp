@@ -118,26 +118,6 @@ contract DomainNFT is AccessControlEnumerableUpgradeable, PausableUpgradeable, E
         return (roleMember, cursor + length);
     }
 
-    /*
-    function setDefaultRoyalty(address royaltyReceiver, uint96 feeNumerator) external {
-        require(hasRole(ROLE_ADMIN, _msgSender()), "DomainNFT: ERR_ACCESS_DENIED");
-        _setDefaultRoyalty(royaltyReceiver, feeNumerator);
-    }
-
-    function frozenTokenId(uint256 tokenId_) public {
-        require(hasRole(ROLE_FROZEN, _msgSender()), "DomainNFT: ERR_ACCESS_DENIED");
-        require(!isFrozenTokenId[tokenId_], "DomainNFT: tokenId is frozen");
-        isFrozenTokenId[tokenId_] = true;
-        emit FrozenTokenId(tokenId_);
-    }
-
-    function unfreezeTokenId(uint256 tokenId_) public {
-        require(hasRole(ROLE_FROZEN, _msgSender()), "DomainNFT: ERR_ACCESS_DENIED");
-        require(isFrozenTokenId[tokenId_], "DomainNFT: tokenId not frozen");
-        isFrozenTokenId[tokenId_] = false;
-        emit UnfreezeTokenId(tokenId_);
-    }*/
-
     function _revokeRole(bytes32 role, address account) internal override {
         super._revokeRole(role, account);
         if (role == ROLE_ADMIN) {
