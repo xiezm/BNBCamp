@@ -10,6 +10,7 @@
     "test": "hardhat --verbose --show-stack-traces test --verbose",
     "deploy_local": "hardhat --verbose --show-stack-traces run scripts/deploy/index.ts --network local",
     "deploy_bscTestnet": "hardhat --verbose --show-stack-traces run scripts/deploy/index.ts --network bscTestnet",
+    "test_bscTestnet": "hardhat run scripts/test/index.ts --network bscTestnet",
     "verify_bscTestnet": "hardhat --verbose --show-stack-traces run scripts/verify/index.ts --network bscTestnet",
     "verify_bscTestnet_DemoProxyAdmin": "hardhat --verbose --show-stack-traces verify --network bscTestnet --contract contracts/proxy-admin/DemoProxyAdmin.sol:DemoProxyAdmin 0xCA92Dc77158387508fa0b3EC19ceEAc7ee86Ce1B",
     "verify_bscTestnet_DemoNFTProxy": "hardhat --verbose --show-stack-traces verify --network bscTestnet --contract contracts/erc721/DemoNFTProxy.sol:DemoNFTProxy 0xB2110D5Dd6983b3f311792c8d92c8ac26A378Cc3 0xd68d151F65f502344A49d3E1565159f33Cd58844 0xCA92Dc77158387508fa0b3EC19ceEAc7ee86Ce1B 0x8129fc1c"
