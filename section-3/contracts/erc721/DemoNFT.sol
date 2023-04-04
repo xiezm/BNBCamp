@@ -11,7 +11,7 @@ import {Counters} from "@openzeppelin/contracts/utils/Counters.sol";
 
 import {AccessControlEnumerableUpgradeable} from "../access/AccessControlEnumerableUpgradeable.sol";
 
-contract DomainNFT is AccessControlEnumerableUpgradeable, PausableUpgradeable, ERC721EnumerableUpgradeable, ERC2981Upgradeable {
+contract DemoNFT is AccessControlEnumerableUpgradeable, PausableUpgradeable, ERC721EnumerableUpgradeable, ERC2981Upgradeable {
 
     using EnumerableSetUpgradeable for EnumerableSetUpgradeable.AddressSet;
 
@@ -59,12 +59,12 @@ contract DomainNFT is AccessControlEnumerableUpgradeable, PausableUpgradeable, E
     }
 
     function pause() external {
-        require(hasRole(ROLE_ADMIN, _msgSender()), "DomainNFT: ERR_ACCESS_DENIED");
+        require(hasRole(ROLE_ADMIN, _msgSender()), "DemoNFTNFT: ERR_ACCESS_DENIED");
         _pause();
     }
 
     function unpause() external {
-        require(hasRole(ROLE_ADMIN, _msgSender()), "DomainNFT: ERR_ACCESS_DENIED");
+        require(hasRole(ROLE_ADMIN, _msgSender()), "DemoNFTNFT: ERR_ACCESS_DENIED");
         _unpause();
     }
 
@@ -73,7 +73,7 @@ contract DomainNFT is AccessControlEnumerableUpgradeable, PausableUpgradeable, E
     }
 
     function setBaseURI(string calldata baseURI) external {
-        require(hasRole(ROLE_ADMIN, _msgSender()), "DomainNFT: ERR_ACCESS_DENIED");
+        require(hasRole(ROLE_ADMIN, _msgSender()), "DemoNFTNFT: ERR_ACCESS_DENIED");
         _baseURI_ = baseURI;
     }
 
@@ -84,12 +84,12 @@ contract DomainNFT is AccessControlEnumerableUpgradeable, PausableUpgradeable, E
     }
 
     function burn(uint256 tokenId) external {
-        require(!isFrozenTokenId[tokenId], 'DomainNFT: is frozen tokenId');
+        require(!isFrozenTokenId[tokenId], 'DemoNFTNFT: is frozen tokenId');
         super._burn(tokenId);
     }
 
     function batchMint(address[] memory recipients) external {
-        require(recipients.length > 0, 'DomainNFT: recipients is empty');
+        require(recipients.length > 0, 'DemoNFTNFT: recipients is empty');
         uint256 length = recipients.length;
         for (uint256 i = 0; i < length;) {
             mint(recipients[i]);
@@ -121,12 +121,12 @@ contract DomainNFT is AccessControlEnumerableUpgradeable, PausableUpgradeable, E
     function _revokeRole(bytes32 role, address account) internal override {
         super._revokeRole(role, account);
         if (role == ROLE_ADMIN) {
-            require(getRoleMemberCount(ROLE_ADMIN) > 0, 'DomainNFT: there must be an administrator');
+            require(getRoleMemberCount(ROLE_ADMIN) > 0, 'DemoNFTNFT: there must be an administrator');
         }
     }
 
     function _afterTokenTransfer(address from, address to, uint256 tokenId) internal {
-        require(!isFrozenTokenId[tokenId], 'DomainNFT: is frozen tokenId');
+        require(!isFrozenTokenId[tokenId], 'DemoNFTNFT: is frozen tokenId');
         super._transfer(from, to, tokenId);
     }
 

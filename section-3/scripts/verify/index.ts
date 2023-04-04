@@ -1,7 +1,8 @@
-import { BEP20A, BEP20B, StakingRewards } from '~/constants/addresses'
+import addresses from '~/constants/addresses'
 import console from 'console'
 import { getSigner } from "~/utils/signer";
 import { AddressZero } from "@ethersproject/constants";
+import { DemoNFT__factory } from "../../typechain-types";
 
 const hre = require('hardhat')
 
@@ -18,26 +19,27 @@ async function main() {
   const currentSigner = signer0
   console.log('currentSigner = %s', currentSigner.address)
 
-  // BEP20A
-  const bep20AAddress = BEP20A[chainId]
+  //【DemoProxyAdmin】
+  const DemoProxyAdminAddress = addresses.DemoProxyAdmin[chainId]
   // await hre.run('verify:verify', {
-  //   address: bep20AAddress,
-  //   constructorArguments: ['BEP20A', 'BEP20A', 18],
+  //   address: DemoProxyAdminAddress,
+  //   constructorArguments: [],
   // })
 
-  // BEP20B
-  const bep20BAddress = BEP20B[chainId]
+  //【DemoNFTLogic】
+  const DemoNFTLogicAddress = addresses.DemoNFTLogic[chainId]
   // await hre.run('verify:verify', {
-  //   address: bep20BAddress,
-  //   constructorArguments: ['BEP20B', 'BEP20B', 9],
+  //   address: DemoNFTLogicAddress,
   // })
 
-  // StakingRewards
-  const stakingRewardsAddress = StakingRewards[chainId]
-  await hre.run('verify:verify', {
-    address: stakingRewardsAddress,
-    constructorArguments: [currentSigner.address, AddressZero, bep20AAddress, bep20BAddress],
-  })
+  //【DemoNFTProxy】
+  const DemoNFTProxyAddress = addresses.DemoNFTProxy[chainId]
+  const _data = DemoNFT__factory.createInterface().encodeFunctionData('initialize')
+  console.log(' DemoNFTProxy data = %s', _data)
+  // await hre.run('verify:verify', {
+  //   address: DemoNFTProxyAddress,
+  //   constructorArguments: [DemoNFTLogicAddress, DemoProxyAdminAddress, _data],
+  // })
 }
 
 main()

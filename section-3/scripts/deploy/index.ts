@@ -1,10 +1,8 @@
 import { getChainId } from '~/utils/chain'
 import { getSigner } from '~/utils/signer'
-import { BEP20A, BEP20B, StakingRewards } from '~/constants/addresses'
-import { deployBEP20 } from '~/deploy/contracts/bep20'
-import { deployStakingRewards } from '~/deploy/contracts/staking-rewards'
-import { AddressZero } from "@ethersproject/constants";
 import { deployDemoProxyAdmin } from "~/deploy/contracts/proxy-admin/DemoProxyAdmin";
+import { deployDemoNFT } from "~/deploy/contracts/erc721/DemoNFT";
+import { deployDemoNFTProxy } from "~/deploy/contracts/erc721/DemoNFTProxy";
 
 async function main() {
   const chainId = getChainId()
@@ -17,21 +15,21 @@ async function main() {
   // ProxyAdmin
   const demoProxyAdmin = await deployDemoProxyAdmin(chainId, signer0)
   // DemoNFT
-  const demoNFTLogic = await deployDemoNFT(chainId, signer0)
+  const demoNFT = await deployDemoNFT(chainId, signer0)
   // DemoNFTProxy
   const demoNFTProxy = await deployDemoNFTProxy(
     chainId,
     signer0,
-    demoNFTLogic,
+    demoNFT,
     demoProxyAdmin
   )
 
   console.log('\n\n\n')
   console.log('############################## all contracts address')
-  console.log('\n############################## BEP20A address = %s', bep20A.address)
-  console.log('\n############################## BEP20B address = %s', bep20B.address)
+  console.log('\n############################## DemoProxyAdmin address = %s', demoProxyAdmin.address)
+  console.log('\n############################## DemoNFTLogic address = %s', demoNFT.address)
   console.log('\n\n\n')
-  console.log('\n############################## StakingRewards address = %s', stakingRewards.address)
+  console.log('\n############################## DemoNFTProxy address = %s', demoNFTProxy.address)
   console.log('\n\n\n')
 }
 
